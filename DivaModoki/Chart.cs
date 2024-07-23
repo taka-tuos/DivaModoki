@@ -70,7 +70,7 @@ namespace DivaModoki
 
         public double GetLength()
         {
-            return 60.0 / bpm * 4.0;
+            return 60.0 / bpm * 4.0 * 1000.0;
         }
     }
 
@@ -100,7 +100,7 @@ namespace DivaModoki
             measures = new List<Measure>();
         }
 
-        public void PeekNotes(int time, int range, out SortedDictionary<int, Note> notes)
+        public void PeekNotes(long time, int range, out SortedDictionary<int, Note> notes)
         {
             notes = new SortedDictionary<int, Note>();
 
@@ -110,7 +110,7 @@ namespace DivaModoki
             {
                 double mlength = measures[i].GetLength();
 
-                if (gtime >= time && gtime - time < range)
+                if (gtime + mlength >= time && gtime - time < range)
                 {
                     double delta = gtime - time;
 
